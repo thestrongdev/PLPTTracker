@@ -8,15 +8,25 @@
 
 /*updates background color of nav bar*/
 nav{
-    background-color: palevioletred !important;
+    background-color: darkgoldenrod !important;
 }
 
 /*updates the fontcolor for title of site in the navigation menu*/
 .navbar-brand {
-    color: gold !important;
+    color: black !important;
 }
 
 /*updates the fontcolor for the other items in the navigation menu*/
 .nav-link{
-    color: aqua !important;
+    color: black !important;
+}
+
+.welcome{
+    color: gold;
+}
+
+.identity{
+    padding: 10px;
+    border-radius: 5px;
+    background-color: lightyellow;
 }
