@@ -16,6 +16,6 @@ namespace PLPointTrackingSystem.DALModels
         public int Age { get; set; } 
         public int Wilks { get; set; }
         public int Total { get; set; }
-        public List<String> LifterDivisions { get; set; }
+        public string LifterDivisions { get; set; }
     }
 }

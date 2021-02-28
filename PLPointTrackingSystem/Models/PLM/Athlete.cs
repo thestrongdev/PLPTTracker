@@ -15,11 +15,8 @@ namespace PLPointTrackingSystem
         public string LastName { get; set; }
         public string Gender { get; set; }
         public int Age { get; set; } //MAY NOT NEED
-
         public int Wilks { get; set; }
-
         public int Total { get; set; }
-
         public List<Division> LifterDivisions { get; set; }
 
 

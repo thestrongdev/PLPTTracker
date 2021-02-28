@@ -9,7 +9,7 @@ namespace PLPointTrackingSystem.Models.PLMController
     {
         public override void TechnicalMiss()
         {
-            throw new NotImplementedException();
+            
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using PLPointTrackingSystem.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +10,16 @@ namespace PLPointTrackingSystem.Controllers
 {
     public class PLMController : Controller
     {
+        private readonly PowerliftDBContext _powerliftDBContext;
+        private readonly UserManager<IdentityUser> _userManager;
+
+        public PLMController(PowerliftDBContext powerliftDBContext,
+            UserManager<IdentityUser> userManager)
+        {
+            _powerliftDBContext = powerliftDBContext;
+            _userManager = userManager;
+        }
+
         public IActionResult Index()
         {
             return View();

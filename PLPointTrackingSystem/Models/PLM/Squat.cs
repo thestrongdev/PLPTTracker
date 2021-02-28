@@ -5,7 +5,11 @@ using System.Threading.Tasks;
 
 namespace PLPointTrackingSystem.Models.PLMController
 {
-    public class Squat
+    public class Squat : Lift
     {
+        public override void TechnicalMiss()
+        {
+            
+        }
     }
 }
