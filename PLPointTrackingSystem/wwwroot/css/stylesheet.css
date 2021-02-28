@@ -1,0 +1,22 @@
+﻿
+
+/*To update the below, you must remove the "bg-light" class and "text-dark" class from the following:
+    nav element and within the a element that's within the li element. 
+    These classes have the !important attribute which make it so you can't change the background of the header
+*/
+
+
+/*updates background color of nav bar*/
+nav{
+    background-color: palevioletred !important;
+}
+
+/*updates the fontcolor for title of site in the navigation menu*/
+.navbar-brand {
+    color: gold !important;
+}
+
+/*updates the fontcolor for the other items in the navigation menu*/
+.nav-link{
+    color: aqua !important;
+}
