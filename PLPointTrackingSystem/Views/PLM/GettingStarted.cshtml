@@ -1,0 +1,23 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<link rel="stylesheet" href="~/css/stylesheet.css" />
+@model PLPointTrackingSystem.Models.PLM.GettingStartedViewModel
+
+    <div id="athleteUpload">
+        <form method="post" enctype="multipart/form-data" asp-controller="FileUpload" asp-action="UploadAthleteData">
+            <div class="form-group">
+                <div class="col-md-10">
+                    <p>Upload Athlete Data Here:</p>
+                    <input type="file" name="file" />
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-10">
+                    <input type="submit" value="Upload" />
+                </div>
+            </div>
+        </form>
+    </div>

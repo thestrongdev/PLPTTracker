@@ -25,15 +25,12 @@ namespace PLPointTrackingSystem.Controllers
             return View();
         }
 
-        public IActionResult UploadMeetData()
+        public IActionResult GettingStarted()
         {
             return View();
         }
 
-        public IActionResult UploadAthleteData()
-        {
-            return View();
-        }
+ 
 
 
         //FEATURES TO ADD
