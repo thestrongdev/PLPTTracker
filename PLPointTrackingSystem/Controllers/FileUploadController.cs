@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OfficeOpenXml;
+using PLPointTrackingSystem.DALModels;
 using PLPointTrackingSystem.Models.PLM;
 using PLPointTrackingSystem.Models.References;
+using PLPointTrackingSystem.Services;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -13,6 +15,12 @@ namespace PLPointTrackingSystem.Controllers
 {
     public class FileUploadController : Controller
     {
+        private readonly PowerliftDBContext _powerliftDBContext;
+
+        public FileUploadController(PowerliftDBContext powerliftDBContext)
+        {
+            _powerliftDBContext = powerliftDBContext;
+        }
         public IActionResult Index()
         {
             return View();
@@ -40,16 +48,38 @@ namespace PLPointTrackingSystem.Controllers
                             City = worksheet.Cells[row,2].Value.ToString().Trim(),
                             Age = worksheet.Cells[row, 3].Value.ToString().Trim(),
                             Food = worksheet.Cells[row, 4].Value.ToString().Trim()
+
                         });
+
+
                     }
                 }
             }
+
+            //get each item in the database...Mapping with select isn't working so loop for now just to test
+            foreach(var person in viewModel.FileData)
+            {
+                var dbItem = new UploadTestDAL();
+
+                dbItem.Name = person.Name;
+                dbItem.Age = person.Age;
+                dbItem.City = person.City;
+                dbItem.Food = person.Food;
+
+                _powerliftDBContext.Add(dbItem);
+                _powerliftDBContext.SaveChanges();
+            }
+         
 
             return View("UploadTest", viewModel);
         }
 
         public IActionResult UploadTest()
         {
+            
+
+
+
             return View();
         }
 
