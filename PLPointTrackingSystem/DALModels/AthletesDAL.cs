@@ -33,5 +33,13 @@ namespace PLPointTrackingSystem.DALModels
         public int Dead_Attempt1 { get; set; }
         public int Dead_Attempt2 { get; set; }
         public int Dead_Attempt3 { get; set; }
+
+        public int CurrentMeetRanking { get; set; }
+
+        //WHICH MEET??
+        [ForeignKey("Meet")]
+        public int MeetID { get; set; }
+
+        public MeetDAL Meet { get; set; }
     }
 }

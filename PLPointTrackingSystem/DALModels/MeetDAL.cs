@@ -1,14 +1,18 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PLPointTrackingSystem
+namespace PLPointTrackingSystem.DALModels
 {
-    public class Meet
+    public class MeetDAL
     {
-        public string MeetID { get; set; }
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int MeetID { get; set; }
         public string MeetName { get; set; }
         public string MeetType { get; set; } //local, state, regional, national, world
 
@@ -22,5 +26,12 @@ namespace PLPointTrackingSystem
         public string MeetState { get; set; }
 
         public string MeetVenue { get; set; }
+
+        public bool ScoringComplete { get; set; }
+
+        [ForeignKey("AspNetUsers")]
+        public string Id { get; set; }
+
+        public IdentityUser User { get; set; }
     }
 }

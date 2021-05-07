@@ -241,6 +241,9 @@ namespace PLPointTrackingSystem.Migrations
                     b.Property<string>("Club")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("CurrentMeetRanking")
+                        .HasColumnType("int");
+
                     b.Property<int>("Dead_Attempt1")
                         .HasColumnType("int");
 
@@ -255,6 +258,9 @@ namespace PLPointTrackingSystem.Migrations
 
                     b.Property<string>("LifterDivisions")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("MeetID")
+                        .HasColumnType("int");
 
                     b.Property<string>("MemberID")
                         .HasColumnType("nvarchar(max)");
@@ -282,7 +288,53 @@ namespace PLPointTrackingSystem.Migrations
 
                     b.HasKey("AthleteDBID");
 
+                    b.HasIndex("MeetID");
+
                     b.ToTable("Athletes");
+                });
+
+            modelBuilder.Entity("PLPointTrackingSystem.DALModels.MeetDAL", b =>
+                {
+                    b.Property<int>("MeetID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MeetCity")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("MeetDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("MeetFed")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MeetName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MeetState")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MeetType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MeetVenue")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("ScoringComplete")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("MeetID");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Meets");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -334,6 +386,22 @@ namespace PLPointTrackingSystem.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("PLPointTrackingSystem.DALModels.AthletesDAL", b =>
+                {
+                    b.HasOne("PLPointTrackingSystem.DALModels.MeetDAL", "Meet")
+                        .WithMany()
+                        .HasForeignKey("MeetID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("PLPointTrackingSystem.DALModels.MeetDAL", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
                 });
 #pragma warning restore 612, 618
         }

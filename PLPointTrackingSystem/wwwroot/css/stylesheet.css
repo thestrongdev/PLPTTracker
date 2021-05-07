@@ -41,4 +41,19 @@ nav{
     background-color: lightyellow;
     padding: 10px;
     border-radius: 5px;
+    border: 2px solid maroon;
+    text-align: center;
+}
+
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 15px;
+}
+
+th {
+    text-align: center;
 }

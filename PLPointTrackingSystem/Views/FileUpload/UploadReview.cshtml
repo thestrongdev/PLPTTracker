@@ -3,12 +3,21 @@
 *@
 @{
 }
-@model PLPointTrackingSystem.Models.PLM.UploadTestViewModel
+@model PLPointTrackingSystem.Models.PLM.UploadReviewViewModel
     <link rel="stylesheet" href="~/css/stylesheet.css" />
 
-<div id="testUpload">
-    @* show list of data here *@
 
+
+<h3>Uploaded Data Below. Please review before moving forward. <br /> If these looks incorrect, please press delete and re-upload at the "Getting Started" page. <br />
+    If everything looks good, please proceed to the Meet Info Form below.</h3>
+
+<br />
+
+<a asp-controller ="PLM" asp-action="MeetInfoForm">MEET INFO FORM</a>
+<a asp-controller="FileUpload" asp-action="RevertUpload">DELETE INFO</a>
+
+<div id="testUpload">
+  
     @if (Model.FileData.Count > 0)
     {
         <hr />
@@ -17,7 +26,7 @@
 
             <tr>
                 <td>Name</td>
-                <td>USAPL Member ID</td>
+                <td>FED Member ID</td>
                 <td>Age</td>
                 <td>Divsions</td>
                 <td>Weight Class</td>

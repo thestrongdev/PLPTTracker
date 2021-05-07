@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using OfficeOpenXml;
 using PLPointTrackingSystem.DALModels;
 using PLPointTrackingSystem.Models.PLM;
-using PLPointTrackingSystem.Models.References;
 using PLPointTrackingSystem.Services;
 using System;
 using System.Collections.Generic;
@@ -28,7 +27,7 @@ namespace PLPointTrackingSystem.Controllers
 
         public async Task<IActionResult> Import(IFormFile file) //STILL NEED TO ADD TO MAP TO DATABASE AS WELL W/LINQ
         {
-            var viewModel = new UploadTestViewModel();
+            var viewModel = new UploadReviewViewModel();
             viewModel.FileData = new List<Athlete>();
 
             using (var stream = new MemoryStream())
@@ -54,8 +53,6 @@ namespace PLPointTrackingSystem.Controllers
                             Age = worksheet.Cells[row, 7].Value.ToString().Trim()
 
                         });
-
-
                     }
                 }
             }
@@ -73,20 +70,18 @@ namespace PLPointTrackingSystem.Controllers
                 dbItem.Gender = person.Gender;
                 dbItem.Age = person.Age;
 
-                _powerliftDBContext.Add(dbItem);
+                _powerliftDBContext.Athletes.Add(dbItem);
                 _powerliftDBContext.SaveChanges();
             }
-         
 
+            viewModel.FileUploaded = true;
             return View("UploadTest", viewModel);
         }
 
-        public IActionResult UploadTest()
+        public IActionResult RevertUpload() //send to upload review page but make sure page shows nothing
         {
-            
-
-
-
+            //delete database content
+            //add (if list.count !=0 to uploadreview view)
             return View();
         }
 

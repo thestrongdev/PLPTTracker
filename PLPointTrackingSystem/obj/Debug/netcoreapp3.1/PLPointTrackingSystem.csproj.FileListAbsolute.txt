@@ -8,7 +8,6 @@ C:\Users\goods\source\repos\PLPointTrackingSystem\PLPointTrackingSystem\bin\Debu
 C:\Users\goods\source\repos\PLPointTrackingSystem\PLPointTrackingSystem\bin\Debug\netcoreapp3.1\PLPointTrackingSystem.pdb
 C:\Users\goods\source\repos\PLPointTrackingSystem\PLPointTrackingSystem\bin\Debug\netcoreapp3.1\PLPointTrackingSystem.Views.dll
 C:\Users\goods\source\repos\PLPointTrackingSystem\PLPointTrackingSystem\bin\Debug\netcoreapp3.1\PLPointTrackingSystem.Views.pdb
-C:\Users\goods\source\repos\PLPointTrackingSystem\PLPointTrackingSystem\obj\Debug\netcoreapp3.1\PLPointTrackingSystem.csprojAssemblyReference.cache
 C:\Users\goods\source\repos\PLPointTrackingSystem\PLPointTrackingSystem\obj\Debug\netcoreapp3.1\PLPointTrackingSystem.AssemblyInfoInputs.cache
 C:\Users\goods\source\repos\PLPointTrackingSystem\PLPointTrackingSystem\obj\Debug\netcoreapp3.1\PLPointTrackingSystem.AssemblyInfo.cs
 C:\Users\goods\source\repos\PLPointTrackingSystem\PLPointTrackingSystem\obj\Debug\netcoreapp3.1\PLPointTrackingSystem.csproj.CoreCompileInputs.cache
@@ -212,4 +211,9 @@ C:\Users\goods\source\repos\PLPointTrackingSystem\PLPointTrackingSystem\bin\Debu
 C:\Users\goods\source\repos\PLPointTrackingSystem\PLPointTrackingSystem\bin\Debug\netcoreapp3.1\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
 C:\Users\goods\source\repos\PLPointTrackingSystem\PLPointTrackingSystem\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
 C:\Users\goods\source\repos\PLPointTrackingSystem\PLPointTrackingSystem\bin\Debug\netcoreapp3.1\runtimes\win\lib\netcoreapp2.0\System.Text.Encoding.CodePages.dll
-C:\Users\goods\source\repos\PLPointTrackingSystem\PLPointTrackingSystem\obj\Debug\netcoreapp3.1\Razor\Views\FileUpload\UploadTest.cshtml.g.cs
+C:\Users\goods\source\repos\PLPointTrackingSystem\PLPointTrackingSystem\obj\Debug\netcoreapp3.1\Razor\Views\FileUpload\UploadReview.cshtml.g.cs
+C:\Users\goods\source\repos\PLPointTrackingSystem\PLPointTrackingSystem\obj\Debug\netcoreapp3.1\Razor\Views\PLM\MeetInfoForm.cshtml.g.cs
+C:\Users\goods\source\repos\PLPointTrackingSystem\PLPointTrackingSystem\obj\Debug\netcoreapp3.1\PLPointTrackingSystem.csprojAssemblyReference.cache
+C:\Users\goods\source\repos\PLPointTrackingSystem\PLPointTrackingSystem\obj\Debug\netcoreapp3.1\Razor\Views\PLM\MeetList.cshtml.g.cs
+C:\Users\goods\source\repos\PLPointTrackingSystem\PLPointTrackingSystem\obj\Debug\netcoreapp3.1\Razor\Views\PLM\MeetResults.cshtml.g.cs
+C:\Users\goods\source\repos\PLPointTrackingSystem\PLPointTrackingSystem\obj\Debug\netcoreapp3.1\Razor\Views\PLM\ScoreMeet.cshtml.g.cs

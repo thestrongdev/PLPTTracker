@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace PLPointTrackingSystem.Migrations
 {
-    public partial class AthleteModel : Migration
+    public partial class meetTableUpdates : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -44,36 +44,6 @@ namespace PLPointTrackingSystem.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Athletes",
-                columns: table => new
-                {
-                    AthleteDBID = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Club = table.Column<string>(nullable: true),
-                    MemberID = table.Column<string>(nullable: true),
-                    WeightClass = table.Column<string>(nullable: true),
-                    Name = table.Column<string>(nullable: true),
-                    Gender = table.Column<string>(nullable: true),
-                    Age = table.Column<string>(nullable: true),
-                    LifterDivisions = table.Column<string>(nullable: true),
-                    Wilks = table.Column<int>(nullable: false),
-                    Total = table.Column<int>(nullable: false),
-                    Squat_Attempt1 = table.Column<int>(nullable: false),
-                    Squat_Attempt2 = table.Column<int>(nullable: false),
-                    Squat_Attempt3 = table.Column<int>(nullable: false),
-                    Bench_Attempt1 = table.Column<int>(nullable: false),
-                    Bench_Attempt2 = table.Column<int>(nullable: false),
-                    Bench_Attempt3 = table.Column<int>(nullable: false),
-                    Dead_Attempt1 = table.Column<int>(nullable: false),
-                    Dead_Attempt2 = table.Column<int>(nullable: false),
-                    Dead_Attempt3 = table.Column<int>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Athletes", x => x.AthleteDBID);
                 });
 
             migrationBuilder.CreateTable(
@@ -182,6 +152,72 @@ namespace PLPointTrackingSystem.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Meets",
+                columns: table => new
+                {
+                    MeetID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    MeetName = table.Column<string>(nullable: true),
+                    MeetType = table.Column<string>(nullable: true),
+                    MeetFed = table.Column<string>(nullable: true),
+                    MeetDate = table.Column<DateTime>(nullable: false),
+                    MeetCity = table.Column<string>(nullable: true),
+                    MeetState = table.Column<string>(nullable: true),
+                    MeetVenue = table.Column<string>(nullable: true),
+                    ScoringComplete = table.Column<bool>(nullable: false),
+                    Id = table.Column<string>(nullable: true),
+                    UserId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Meets", x => x.MeetID);
+                    table.ForeignKey(
+                        name: "FK_Meets_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Athletes",
+                columns: table => new
+                {
+                    AthleteDBID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Club = table.Column<string>(nullable: true),
+                    MemberID = table.Column<string>(nullable: true),
+                    WeightClass = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(nullable: true),
+                    Gender = table.Column<string>(nullable: true),
+                    Age = table.Column<string>(nullable: true),
+                    LifterDivisions = table.Column<string>(nullable: true),
+                    Wilks = table.Column<int>(nullable: false),
+                    Total = table.Column<int>(nullable: false),
+                    Squat_Attempt1 = table.Column<int>(nullable: false),
+                    Squat_Attempt2 = table.Column<int>(nullable: false),
+                    Squat_Attempt3 = table.Column<int>(nullable: false),
+                    Bench_Attempt1 = table.Column<int>(nullable: false),
+                    Bench_Attempt2 = table.Column<int>(nullable: false),
+                    Bench_Attempt3 = table.Column<int>(nullable: false),
+                    Dead_Attempt1 = table.Column<int>(nullable: false),
+                    Dead_Attempt2 = table.Column<int>(nullable: false),
+                    Dead_Attempt3 = table.Column<int>(nullable: false),
+                    CurrentMeetRanking = table.Column<int>(nullable: false),
+                    MeetID = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Athletes", x => x.AthleteDBID);
+                    table.ForeignKey(
+                        name: "FK_Athletes_Meets_MeetID",
+                        column: x => x.MeetID,
+                        principalTable: "Meets",
+                        principalColumn: "MeetID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -220,6 +256,16 @@ namespace PLPointTrackingSystem.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Athletes_MeetID",
+                table: "Athletes",
+                column: "MeetID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Meets_UserId",
+                table: "Meets",
+                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -244,6 +290,9 @@ namespace PLPointTrackingSystem.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
+
+            migrationBuilder.DropTable(
+                name: "Meets");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PLPointTrackingSystem.Models.PLMController;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -20,6 +21,13 @@ namespace PLPointTrackingSystem
         public string DivisionString { get; set; }
         public List<Division> LifterDivisions { get; set; } //MAP TO THIS AFTER GATHERING DATA FROM UPLOAD???
 
+        public Squat SquatAttempts { get; set; }
+        public Bench BenchAttempts { get; set; }
 
+        public Deadlift DeadliftAttempts { get; set; }
+        
+        public int CurrentMeetRanking { get; set; }
+
+        public int MeetID { get; set; }
     }
 }

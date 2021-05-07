@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using PLPointTrackingSystem.DALModels;
+using PLPointTrackingSystem.Models.PLM;
 using PLPointTrackingSystem.Services;
 using System;
 using System.Collections.Generic;
@@ -30,7 +32,75 @@ namespace PLPointTrackingSystem.Controllers
             return View();
         }
 
- 
+        public IActionResult MeetInfoForm()
+        {
+            return View();
+        }
+
+        public IActionResult MeetList()
+        {
+            var viewModel = new MeetListViewModel();
+
+
+            return View();
+        }
+
+        public IActionResult LiftMake()
+        {
+            return View();
+        }
+
+        public IActionResult LiftMiss()
+        {
+            return View();
+        }
+
+        public IActionResult ReRankAthletes()
+        {
+            return View();
+        }
+
+        public IActionResult SearchAthletes()
+        {
+            return View();
+        }
+
+        public IActionResult SortAthletes()
+        {
+            return View();
+        }
+
+        //NEED FILTERING FUNCTIONALITY TOO
+
+        public IActionResult SubmitMeetInfo(MeetInfoFormViewModel viewModel)
+        {
+            var meet = new MeetDAL();
+            meet.MeetType = viewModel.MeetType;
+            meet.MeetName = viewModel.MeetName;
+            meet.MeetFed = viewModel.MeetFed;
+            meet.MeetDate = viewModel.MeetDate;
+            meet.MeetCity = viewModel.MeetCity;
+            meet.MeetState = viewModel.MeetState;
+            meet.MeetVenue = viewModel.MeetVenue;
+
+            _powerliftDBContext.Meets.Add(meet); 
+            _powerliftDBContext.SaveChanges();
+
+            //if athlete MeetID null or zero?, then populate with this meet's ID!
+
+            var meetAthletes = _powerliftDBContext.Athletes.Where(athlete => athlete.MeetID == 0);
+            var currentMeet = _powerliftDBContext.Meets.Where(meet => meet.MeetName == viewModel.MeetName).FirstOrDefault();
+
+            foreach (var athlete in meetAthletes)
+            {
+                athlete.MeetID = currentMeet.MeetID;
+                _powerliftDBContext.SaveChanges();
+            }
+
+            return View("MeetScoring");
+        }
+
+
 
 
         //FEATURES TO ADD
