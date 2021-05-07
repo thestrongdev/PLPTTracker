@@ -219,9 +219,9 @@ namespace PLPointTrackingSystem.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("PLPointTrackingSystem.DALModels.UploadTestDAL", b =>
+            modelBuilder.Entity("PLPointTrackingSystem.DALModels.AthletesDAL", b =>
                 {
-                    b.Property<int>("TestID")
+                    b.Property<int>("AthleteDBID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -229,18 +229,60 @@ namespace PLPointTrackingSystem.Migrations
                     b.Property<string>("Age")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("City")
+                    b.Property<int>("Bench_Attempt1")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Bench_Attempt2")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Bench_Attempt3")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Club")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Food")
+                    b.Property<int>("Dead_Attempt1")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Dead_Attempt2")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Dead_Attempt3")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Gender")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LifterDivisions")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MemberID")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("TestID");
+                    b.Property<int>("Squat_Attempt1")
+                        .HasColumnType("int");
 
-                    b.ToTable("Test");
+                    b.Property<int>("Squat_Attempt2")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Squat_Attempt3")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Total")
+                        .HasColumnType("int");
+
+                    b.Property<string>("WeightClass")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Wilks")
+                        .HasColumnType("int");
+
+                    b.HasKey("AthleteDBID");
+
+                    b.ToTable("Athletes");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

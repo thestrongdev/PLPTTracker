@@ -17,19 +17,25 @@
 
             <tr>
                 <td>Name</td>
-                <td>City</td>
+                <td>USAPL Member ID</td>
                 <td>Age</td>
-                <td>Food</td>
+                <td>Divsions</td>
+                <td>Weight Class</td>
+                <td>Club</td>
+                <td>Gender</td>
             </tr>
 
             @foreach (var item in @Model.FileData)
             {
-                <tr>
-                    <td>@item.Name</td>
-                    <td>@item.City</td>
-                    <td>@item.Age</td>
-                    <td>@item.Food</td>
-                </tr>
+        <tr>
+            <td>@item.Name</td>
+            <td>@item.MemberID</td>
+            <td>@item.Age</td>
+            <td>@item.DivisionString</td>
+            <td>@item.WeightClass</td>
+            <td>@item.Club</td>
+            <td>@item.Gender</td>
+        </tr>
             }
 
         </table>

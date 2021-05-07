@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace PLPointTrackingSystem.Migrations
 {
-    public partial class testing : Migration
+    public partial class AthleteModel : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -47,19 +47,33 @@ namespace PLPointTrackingSystem.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Test",
+                name: "Athletes",
                 columns: table => new
                 {
-                    TestID = table.Column<int>(nullable: false)
+                    AthleteDBID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    Club = table.Column<string>(nullable: true),
+                    MemberID = table.Column<string>(nullable: true),
+                    WeightClass = table.Column<string>(nullable: true),
                     Name = table.Column<string>(nullable: true),
-                    City = table.Column<string>(nullable: true),
+                    Gender = table.Column<string>(nullable: true),
                     Age = table.Column<string>(nullable: true),
-                    Food = table.Column<string>(nullable: true)
+                    LifterDivisions = table.Column<string>(nullable: true),
+                    Wilks = table.Column<int>(nullable: false),
+                    Total = table.Column<int>(nullable: false),
+                    Squat_Attempt1 = table.Column<int>(nullable: false),
+                    Squat_Attempt2 = table.Column<int>(nullable: false),
+                    Squat_Attempt3 = table.Column<int>(nullable: false),
+                    Bench_Attempt1 = table.Column<int>(nullable: false),
+                    Bench_Attempt2 = table.Column<int>(nullable: false),
+                    Bench_Attempt3 = table.Column<int>(nullable: false),
+                    Dead_Attempt1 = table.Column<int>(nullable: false),
+                    Dead_Attempt2 = table.Column<int>(nullable: false),
+                    Dead_Attempt3 = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Test", x => x.TestID);
+                    table.PrimaryKey("PK_Athletes", x => x.AthleteDBID);
                 });
 
             migrationBuilder.CreateTable(
@@ -226,7 +240,7 @@ namespace PLPointTrackingSystem.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Test");
+                name: "Athletes");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

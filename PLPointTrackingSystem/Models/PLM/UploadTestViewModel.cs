@@ -8,6 +8,6 @@ namespace PLPointTrackingSystem.Models.PLM
 {
     public class UploadTestViewModel
     {
-        public List<TestData> FileData { get; set; }
+        public List<Athlete> FileData { get; set; }
     }
 }

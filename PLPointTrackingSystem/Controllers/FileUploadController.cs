@@ -29,7 +29,7 @@ namespace PLPointTrackingSystem.Controllers
         public async Task<IActionResult> Import(IFormFile file) //STILL NEED TO ADD TO MAP TO DATABASE AS WELL W/LINQ
         {
             var viewModel = new UploadTestViewModel();
-            viewModel.FileData = new List<TestData>();
+            viewModel.FileData = new List<Athlete>();
 
             using (var stream = new MemoryStream())
             {
@@ -42,12 +42,16 @@ namespace PLPointTrackingSystem.Controllers
 
                     for (int row = 2; row < rowcount; row++)
                     {
-                        viewModel.FileData.Add(new TestData
+                        viewModel.FileData.Add(new Athlete
                         {
-                            Name = worksheet.Cells[row, 1].Value.ToString().Trim(),
-                            City = worksheet.Cells[row,2].Value.ToString().Trim(),
-                            Age = worksheet.Cells[row, 3].Value.ToString().Trim(),
-                            Food = worksheet.Cells[row, 4].Value.ToString().Trim()
+                            //will need to have data formatted in a very specific way
+                            MemberID = worksheet.Cells[row, 1].Value.ToString().Trim(),
+                            Name = worksheet.Cells[row,2].Value.ToString().Trim(),
+                            Club = worksheet.Cells[row, 3].Value.ToString().Trim(),
+                            WeightClass = worksheet.Cells[row, 4].Value.ToString().Trim(),
+                            DivisionString = worksheet.Cells[row, 5].Value.ToString().Trim(),
+                            Gender = worksheet.Cells[row, 6].Value.ToString().Trim(),
+                            Age = worksheet.Cells[row, 7].Value.ToString().Trim()
 
                         });
 
@@ -59,12 +63,15 @@ namespace PLPointTrackingSystem.Controllers
             //get each item in the database...Mapping with select isn't working so loop for now just to test
             foreach(var person in viewModel.FileData)
             {
-                var dbItem = new UploadTestDAL();
+                var dbItem = new AthletesDAL();
 
                 dbItem.Name = person.Name;
+                dbItem.MemberID = person.MemberID;
+                dbItem.Club = person.Club;
+                dbItem.WeightClass = person.WeightClass;
+                dbItem.LifterDivisions = person.DivisionString;
+                dbItem.Gender = person.Gender;
                 dbItem.Age = person.Age;
-                dbItem.City = person.City;
-                dbItem.Food = person.Food;
 
                 _powerliftDBContext.Add(dbItem);
                 _powerliftDBContext.SaveChanges();
