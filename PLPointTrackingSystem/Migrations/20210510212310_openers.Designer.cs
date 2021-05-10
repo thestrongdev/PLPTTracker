@@ -10,8 +10,8 @@ using PLPointTrackingSystem.Services;
 namespace PLPointTrackingSystem.Migrations
 {
     [DbContext(typeof(PowerliftDBContext))]
-    [Migration("20210507162531_meetTableUpdates")]
-    partial class meetTableUpdates
+    [Migration("20210510212310_openers")]
+    partial class openers
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -231,14 +231,17 @@ namespace PLPointTrackingSystem.Migrations
                     b.Property<string>("Age")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Bench_Attempt1")
-                        .HasColumnType("int");
+                    b.Property<double>("Bench_Attempt1")
+                        .HasColumnType("float");
 
-                    b.Property<int>("Bench_Attempt2")
-                        .HasColumnType("int");
+                    b.Property<double>("Bench_Attempt2")
+                        .HasColumnType("float");
 
-                    b.Property<int>("Bench_Attempt3")
-                        .HasColumnType("int");
+                    b.Property<double>("Bench_Attempt3")
+                        .HasColumnType("float");
+
+                    b.Property<string>("Bench_Opener")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Club")
                         .HasColumnType("nvarchar(max)");
@@ -246,14 +249,17 @@ namespace PLPointTrackingSystem.Migrations
                     b.Property<int>("CurrentMeetRanking")
                         .HasColumnType("int");
 
-                    b.Property<int>("Dead_Attempt1")
-                        .HasColumnType("int");
+                    b.Property<double>("Dead_Attempt1")
+                        .HasColumnType("float");
 
-                    b.Property<int>("Dead_Attempt2")
-                        .HasColumnType("int");
+                    b.Property<double>("Dead_Attempt2")
+                        .HasColumnType("float");
 
-                    b.Property<int>("Dead_Attempt3")
-                        .HasColumnType("int");
+                    b.Property<double>("Dead_Attempt3")
+                        .HasColumnType("float");
+
+                    b.Property<string>("Deadlift_Opener")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Gender")
                         .HasColumnType("nvarchar(max)");
@@ -270,23 +276,26 @@ namespace PLPointTrackingSystem.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Squat_Attempt1")
-                        .HasColumnType("int");
+                    b.Property<double>("Squat_Attempt1")
+                        .HasColumnType("float");
 
-                    b.Property<int>("Squat_Attempt2")
-                        .HasColumnType("int");
+                    b.Property<double>("Squat_Attempt2")
+                        .HasColumnType("float");
 
-                    b.Property<int>("Squat_Attempt3")
-                        .HasColumnType("int");
+                    b.Property<double>("Squat_Attempt3")
+                        .HasColumnType("float");
 
-                    b.Property<int>("Total")
-                        .HasColumnType("int");
+                    b.Property<string>("Squat_Opener")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("Total")
+                        .HasColumnType("float");
 
                     b.Property<string>("WeightClass")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Wilks")
-                        .HasColumnType("int");
+                    b.Property<double>("Wilks")
+                        .HasColumnType("float");
 
                     b.HasKey("AthleteDBID");
 

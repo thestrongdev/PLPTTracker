@@ -21,6 +21,12 @@ namespace PLPointTrackingSystem
         public string DivisionString { get; set; }
         public List<Division> LifterDivisions { get; set; } //MAP TO THIS AFTER GATHERING DATA FROM UPLOAD???
 
+        public string Squat_Opener { get; set; }
+
+        public string Bench_Opener { get; set; }
+
+        public string Deadlift_Opener { get; set; }
+
         public Squat SquatAttempts { get; set; }
         public Bench BenchAttempts { get; set; }
 

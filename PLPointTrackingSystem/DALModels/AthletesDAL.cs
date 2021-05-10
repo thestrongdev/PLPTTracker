@@ -21,18 +21,24 @@ namespace PLPointTrackingSystem.DALModels
         public string Age { get; set; } 
         public string LifterDivisions { get; set; }
 
+        public string Squat_Opener { get; set; }
+
+        public string Bench_Opener { get; set; }
+
+        public string Deadlift_Opener { get; set; }
+
         //OBTAINED WHILE SCORING
-        public int Wilks { get; set; }
-        public int Total { get; set; }
-        public int Squat_Attempt1 { get; set; }
-        public int Squat_Attempt2 { get; set; }
-        public int Squat_Attempt3 { get; set; }
-        public int Bench_Attempt1 { get; set; }
-        public int Bench_Attempt2 { get; set; }
-        public int Bench_Attempt3 { get; set; }
-        public int Dead_Attempt1 { get; set; }
-        public int Dead_Attempt2 { get; set; }
-        public int Dead_Attempt3 { get; set; }
+        public double Wilks { get; set; }
+        public double Total { get; set; }
+        public double Squat_Attempt1 { get; set; }
+        public double Squat_Attempt2 { get; set; }
+        public double Squat_Attempt3 { get; set; }
+        public double Bench_Attempt1 { get; set; }
+        public double Bench_Attempt2 { get; set; }
+        public double Bench_Attempt3 { get; set; }
+        public double Dead_Attempt1 { get; set; }
+        public double Dead_Attempt2 { get; set; }
+        public double Dead_Attempt3 { get; set; }
 
         public int CurrentMeetRanking { get; set; }
 

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace PLPointTrackingSystem.Migrations
 {
-    public partial class meetTableUpdates : Migration
+    public partial class openers : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -193,17 +193,20 @@ namespace PLPointTrackingSystem.Migrations
                     Gender = table.Column<string>(nullable: true),
                     Age = table.Column<string>(nullable: true),
                     LifterDivisions = table.Column<string>(nullable: true),
-                    Wilks = table.Column<int>(nullable: false),
-                    Total = table.Column<int>(nullable: false),
-                    Squat_Attempt1 = table.Column<int>(nullable: false),
-                    Squat_Attempt2 = table.Column<int>(nullable: false),
-                    Squat_Attempt3 = table.Column<int>(nullable: false),
-                    Bench_Attempt1 = table.Column<int>(nullable: false),
-                    Bench_Attempt2 = table.Column<int>(nullable: false),
-                    Bench_Attempt3 = table.Column<int>(nullable: false),
-                    Dead_Attempt1 = table.Column<int>(nullable: false),
-                    Dead_Attempt2 = table.Column<int>(nullable: false),
-                    Dead_Attempt3 = table.Column<int>(nullable: false),
+                    Squat_Opener = table.Column<string>(nullable: true),
+                    Bench_Opener = table.Column<string>(nullable: true),
+                    Deadlift_Opener = table.Column<string>(nullable: true),
+                    Wilks = table.Column<double>(nullable: false),
+                    Total = table.Column<double>(nullable: false),
+                    Squat_Attempt1 = table.Column<double>(nullable: false),
+                    Squat_Attempt2 = table.Column<double>(nullable: false),
+                    Squat_Attempt3 = table.Column<double>(nullable: false),
+                    Bench_Attempt1 = table.Column<double>(nullable: false),
+                    Bench_Attempt2 = table.Column<double>(nullable: false),
+                    Bench_Attempt3 = table.Column<double>(nullable: false),
+                    Dead_Attempt1 = table.Column<double>(nullable: false),
+                    Dead_Attempt2 = table.Column<double>(nullable: false),
+                    Dead_Attempt3 = table.Column<double>(nullable: false),
                     CurrentMeetRanking = table.Column<int>(nullable: false),
                     MeetID = table.Column<int>(nullable: false)
                 },

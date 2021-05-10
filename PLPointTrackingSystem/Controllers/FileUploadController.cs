@@ -50,7 +50,11 @@ namespace PLPointTrackingSystem.Controllers
                             WeightClass = worksheet.Cells[row, 4].Value.ToString().Trim(),
                             DivisionString = worksheet.Cells[row, 5].Value.ToString().Trim(),
                             Gender = worksheet.Cells[row, 6].Value.ToString().Trim(),
-                            Age = worksheet.Cells[row, 7].Value.ToString().Trim()
+                            Age = worksheet.Cells[row, 7].Value.ToString().Trim(),
+                            Squat_Opener = worksheet.Cells[row, 8].Value.ToString().Trim(),
+                            Bench_Opener = worksheet.Cells[row, 9].Value.ToString().Trim(),
+                            Deadlift_Opener = worksheet.Cells[row, 10].Value.ToString().Trim()
+
 
                         });
                     }
