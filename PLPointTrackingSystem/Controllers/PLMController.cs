@@ -45,6 +45,11 @@ namespace PLPointTrackingSystem.Controllers
             return View();
         }
 
+        public IActionResult ScoreMeet()
+        {
+            return View();
+        }
+
         public IActionResult LiftMake()
         {
             return View();

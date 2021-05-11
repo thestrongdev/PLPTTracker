@@ -73,6 +73,9 @@ namespace PLPointTrackingSystem.Controllers
                 dbItem.LifterDivisions = person.DivisionString;
                 dbItem.Gender = person.Gender;
                 dbItem.Age = person.Age;
+                dbItem.Squat_Opener = person.Squat_Opener;
+                dbItem.Bench_Opener = person.Bench_Opener;
+                dbItem.Deadlift_Opener = person.Deadlift_Opener;
 
                 _powerliftDBContext.Athletes.Add(dbItem);
                 _powerliftDBContext.SaveChanges();
