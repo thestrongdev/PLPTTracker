@@ -22,5 +22,7 @@ namespace PLPointTrackingSystem
         public string MeetState { get; set; }
 
         public string MeetVenue { get; set; }
+
+        public bool ScoringComplete { get; set; }
     }
 }

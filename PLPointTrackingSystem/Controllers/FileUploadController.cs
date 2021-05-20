@@ -25,7 +25,7 @@ namespace PLPointTrackingSystem.Controllers
             return View();
         }
 
-        public async Task<IActionResult> Import(IFormFile file) //STILL NEED TO ADD TO MAP TO DATABASE AS WELL W/LINQ
+        public async Task<IActionResult> Import(IFormFile file, int id) //STILL NEED TO ADD TO MAP TO DATABASE AS WELL W/LINQ
         {
             var viewModel = new UploadReviewViewModel();
             viewModel.FileData = new List<Athlete>();
@@ -53,8 +53,9 @@ namespace PLPointTrackingSystem.Controllers
                             Age = worksheet.Cells[row, 7].Value.ToString().Trim(),
                             Squat_Opener = worksheet.Cells[row, 8].Value.ToString().Trim(),
                             Bench_Opener = worksheet.Cells[row, 9].Value.ToString().Trim(),
-                            Deadlift_Opener = worksheet.Cells[row, 10].Value.ToString().Trim()
-
+                            Deadlift_Opener = worksheet.Cells[row, 10].Value.ToString().Trim(),
+                            MeetID = id //until we actually add a meet
+                            
 
                         });
                     }
@@ -76,13 +77,14 @@ namespace PLPointTrackingSystem.Controllers
                 dbItem.Squat_Opener = person.Squat_Opener;
                 dbItem.Bench_Opener = person.Bench_Opener;
                 dbItem.Deadlift_Opener = person.Deadlift_Opener;
+                dbItem.MeetID = person.MeetID;
 
                 _powerliftDBContext.Athletes.Add(dbItem);
                 _powerliftDBContext.SaveChanges();
             }
 
             viewModel.FileUploaded = true;
-            return View("UploadTest", viewModel);
+            return View("UploadReview", viewModel);
         }
 
         public IActionResult RevertUpload() //send to upload review page but make sure page shows nothing

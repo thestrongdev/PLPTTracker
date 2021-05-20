@@ -42,9 +42,11 @@ namespace PLPointTrackingSystem.DALModels
 
         public int CurrentMeetRanking { get; set; }
 
-        //WHICH MEET??
-        [ForeignKey("Meet")]
-        public int MeetID { get; set; }
+        
+        //WHICH MEET?? NEED TO ADD A MEET FIRST!!
+
+        [ForeignKey("MeetID")]
+        public int? MeetID { get; set; }
 
         public MeetDAL Meet { get; set; }
     }

@@ -4,3 +4,11 @@
 @{
 }
 @model PLPointTrackingSystem.Models.PLM.ScoreMeetViewModel
+    <link rel="stylesheet" href="~/css/stylesheet.css" />
+
+@* Need to filter for weight class and gender to score *@
+
+@if (!Model.AthletesExist)
+{
+    <a asp-action="GettingStarted" asp-controller="PLM" asp-route-id="@Model.MeetID">Please Upload Athlete Data Here!</a>
+}

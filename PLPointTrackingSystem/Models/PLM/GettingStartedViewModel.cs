@@ -8,8 +8,8 @@ namespace PLPointTrackingSystem.Models.PLM
 {
     public class GettingStartedViewModel
     {
-        
 
+        public int MeetID { get; set; }
 
         //[Required(ErrorMessage = "Please select file")]
         ////[FileExt(Allow = ".xls,.xlsx", ErrorMessage = "Only excel file")]

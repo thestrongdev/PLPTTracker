@@ -27,8 +27,11 @@ namespace PLPointTrackingSystem.Controllers
             return View();
         }
 
-        public IActionResult GettingStarted()
+        public IActionResult GettingStarted(int id)
         {
+            var viewModel = new GettingStartedViewModel();
+            viewModel.MeetID = id;
+
             return View();
         }
 
@@ -45,8 +48,23 @@ namespace PLPointTrackingSystem.Controllers
             return View();
         }
 
-        public IActionResult ScoreMeet()
+        public IActionResult ScoreMeet(int id)
         {
+            var viewModel = new ScoreMeetViewModel();
+            viewModel.MeetID = id;
+
+            var meetAthletes = _powerliftDBContext.Athletes.Where(athlete => athlete.MeetID == id);
+
+            if(meetAthletes.Count() == 0)
+            {
+                viewModel.AthletesExist = false;
+            }
+            else
+            {
+                viewModel.AthletesExist = true; //we need this to remain constant throughout the scoring...
+                //add a static property or make it a service value??
+            }
+
             return View();
         }
 
@@ -91,18 +109,22 @@ namespace PLPointTrackingSystem.Controllers
             _powerliftDBContext.Meets.Add(meet); 
             _powerliftDBContext.SaveChanges();
 
-            //if athlete MeetID null or zero?, then populate with this meet's ID!
+           //BELOW LOGIC IF UPLOAD MEET DATA FIRST
 
-            var meetAthletes = _powerliftDBContext.Athletes.Where(athlete => athlete.MeetID == 0);
-            var currentMeet = _powerliftDBContext.Meets.Where(meet => meet.MeetName == viewModel.MeetName).FirstOrDefault();
 
-            foreach (var athlete in meetAthletes)
-            {
-                athlete.MeetID = currentMeet.MeetID;
-                _powerliftDBContext.SaveChanges();
-            }
 
-            return View("MeetScoring");
+            //BELOW LOGIC IF UPLOAD ATHLETES BEFORE MEET DATA
+
+            //var meetAthletes = _powerliftDBContext.Athletes.Where(athlete => athlete.MeetID == 0);
+            //var currentMeet = _powerliftDBContext.Meets.Where(meet => meet.MeetName == viewModel.MeetName).FirstOrDefault();
+
+            //foreach (var athlete in meetAthletes)
+            //{
+            //    athlete.MeetID = currentMeet.MeetID;
+            //    _powerliftDBContext.SaveChanges();
+            //}
+
+            return View("ScoreMeet");
         }
 
 

@@ -7,5 +7,8 @@ namespace PLPointTrackingSystem.Models.PLM
 {
     public class ScoreMeetViewModel
     {
+        public bool AthletesExist { get; set; }
+
+        public int MeetID { get; set; }
     }
 }

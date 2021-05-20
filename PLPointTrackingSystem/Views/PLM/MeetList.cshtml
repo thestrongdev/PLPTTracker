@@ -5,7 +5,22 @@
 }
 
 @model PLPointTrackingSystem.Models.PLM.MeetListViewModel
+    <link rel="stylesheet" href="~/css/stylesheet.css" />
 
-<h2>SCORE A MEET?</h2>
 
-<h2>VIEW MEET RESULTS</h2>
+    <div id="scoreMeet">
+        <h2>SCORE A MEET?</h2>
+
+        <a asp-action="MeetInfoForm" asp-controller="PLM">link to add a new meet to score</a>
+
+     
+        @foreach (var meet in Model.MembersMeets)
+        {
+            <a asp-route-id="@meet.MeetID" asp-action="ScoreMeet" asp-controller="PLM">@meet.MeetName</a>
+            <br />
+        }
+    
+        <p>meets that are not completed (fully scored) go here</p>
+
+        <h2>VIEW MEET RESULTS</h2>
+    </div>
