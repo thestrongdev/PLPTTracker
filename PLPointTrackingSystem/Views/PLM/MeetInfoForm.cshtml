@@ -4,71 +4,74 @@
 @{
 }
 @model PLPointTrackingSystem.Models.PLM.MeetInfoFormViewModel
+    <link rel="stylesheet" href="~/css/stylesheet.css" />
 
-<form asp-controller="PLM" asp-action="SubmitMeetInfo" method="post">
+    <div id="meetInfoForm">
+        <form asp-controller="PLM" asp-action="SubmitMeetInfo" method="post">
 
-    <div>
-        <label asp-for="MeetName">Meet Name: </label>
-        <input asp-for="MeetName" />
+            <div>
+                <label asp-for="MeetName">Meet Name: </label>
+                <input asp-for="MeetName" />
+            </div>
+
+            <br />
+
+            <div>
+                <label asp-for="MeetType">Type of Meet</label>
+                <select asp-for="MeetType">
+                    <option>Local</option>
+                    <option>State</option>
+                    <option>Regional</option>
+                    <option>National</option>
+                    <option>World</option>
+
+                </select>
+            </div>
+            <br />
+            <div>
+
+                <label asp-for="MeetFed">Federation: </label>
+                <input asp-for="MeetFed" />
+
+            </div>
+
+            <br />
+
+            <div>
+
+                <label asp-for="MeetDate">Meet Date: </label>
+                <input asp-for="MeetDate" />
+
+            </div>
+
+            <br />
+
+            <div>
+
+                <label asp-for="MeetCity">Meet City: </label>
+                <input asp-for="MeetCity" />
+
+            </div>
+
+            <br />
+
+            <div>
+
+                <label asp-for="MeetState">Meet State: </label>
+                <input asp-for="MeetState" />
+
+            </div>
+
+            <br />
+
+            <div>
+
+                <label asp-for="MeetVenue">Meet Venue: </label>
+                <input asp-for="MeetVenue" />
+
+            </div>
+
+            <button class="btn btn-dark">SUBMIT INFO</button>
+
+        </form>
     </div>
-
-    <br />
-
-    <div>
-        <label asp-for="MeetType">Type of Meet</label>
-        <select asp-for="MeetType">
-            <option>Local</option>
-            <option>State</option>
-            <option>Regional</option>
-            <option>National</option>
-            <option>World</option>
-
-        </select>
-    </div>
-    <br />
-    <div>
-
-        <label asp-for="MeetFed">Federation: </label>
-        <input asp-for="MeetFed" />
-
-    </div>
-
-    <br />
-
-    <div>
-
-        <label asp-for="MeetDate">Meet Date: </label>
-        <input asp-for="MeetDate" />
-
-    </div>
-
-    <br />
-
-    <div>
-
-        <label asp-for="MeetCity">Meet City: </label>
-        <input asp-for="MeetCity" />
-
-    </div>
-
-    <br />
-
-    <div>
-
-        <label asp-for="MeetState">Meet State: </label>
-        <input asp-for="MeetState" />
-
-    </div>
-
-    <br />
-
-    <div>
-
-        <label asp-for="MeetVenue">Meet Venue: </label>
-        <input asp-for="MeetVenue" />
-
-    </div>
-
-    <button class="btn btn-dark">SUBMIT INFO</button>
-
-</form>
