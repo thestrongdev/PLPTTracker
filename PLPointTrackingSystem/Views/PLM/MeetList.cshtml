@@ -13,14 +13,20 @@
 
         <a asp-action="MeetInfoForm" asp-controller="PLM">link to add a new meet to score</a>
 
+        @if(@Model.MembersMeets.Count != 0) {
      
-        @foreach (var meet in Model.MembersMeets)
-        {
-            <a asp-route-id="@meet.MeetID" asp-action="ScoreMeet" asp-controller="PLM">@meet.MeetName</a>
-            <br />
-        }
+            @foreach (var meet in Model.MembersMeets)
+            {
+                <a asp-route-id="@meet.MeetID" asp-action="ScoreMeet" asp-controller="PLM">@meet.MeetName</a>
+                <br />
+            }
     
-        <p>meets that are not completed (fully scored) go here</p>
+            <p>meets that are not completed (fully scored) go here</p>
 
-        <h2>VIEW MEET RESULTS</h2>
+            <h2>VIEW MEET RESULTS</h2>
+        } else
+        {
+            <h3>YOU HAVE NOT STARTED SCORING FOR ANY MEETS</h3>
+        }
+
     </div>
