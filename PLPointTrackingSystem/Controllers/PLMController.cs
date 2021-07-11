@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using PLPointTrackingSystem.DALModels;
+using PLPointTrackingSystem.Models.Home;
 using PLPointTrackingSystem.Models.PLM;
 using PLPointTrackingSystem.Services;
 using System;
@@ -52,7 +53,9 @@ namespace PLPointTrackingSystem.Controllers
             _powerliftDBContext.Add(member);
             _powerliftDBContext.SaveChanges();
 
-            return View("Index");
+            var home = new IndexViewModel();
+
+            return View("~/Views/Home/Index.cshtml", home);
         }
 
         public IActionResult MeetInfoForm()
@@ -149,42 +152,6 @@ namespace PLPointTrackingSystem.Controllers
         {
             return View();
         }
-
-        //NEED FILTERING FUNCTIONALITY TOO
-
-        public IActionResult SubmitMeetInfo(MeetInfoFormViewModel viewModel)
-        {
-            var meet = new MeetDAL();
-            meet.MeetType = viewModel.MeetType;
-            meet.MeetName = viewModel.MeetName;
-            meet.MeetFed = viewModel.MeetFed;
-            meet.MeetDate = viewModel.MeetDate;
-            meet.MeetCity = viewModel.MeetCity;
-            meet.MeetState = viewModel.MeetState;
-            meet.MeetVenue = viewModel.MeetVenue;
-
-            _powerliftDBContext.Meets.Add(meet); 
-            _powerliftDBContext.SaveChanges();
-
-           //BELOW LOGIC IF UPLOAD MEET DATA FIRST
-
-
-
-            //BELOW LOGIC IF UPLOAD ATHLETES BEFORE MEET DATA
-
-            //var meetAthletes = _powerliftDBContext.Athletes.Where(athlete => athlete.MeetID == 0);
-            //var currentMeet = _powerliftDBContext.Meets.Where(meet => meet.MeetName == viewModel.MeetName).FirstOrDefault();
-
-            //foreach (var athlete in meetAthletes)
-            //{
-            //    athlete.MeetID = currentMeet.MeetID;
-            //    _powerliftDBContext.SaveChanges();
-            //}
-
-            return View("ScoreMeet");
-        }
-
-
 
 
         //FEATURES TO ADD
