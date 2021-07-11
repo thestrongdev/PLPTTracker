@@ -42,51 +42,43 @@ namespace PLPointTrackingSystem.Controllers
 
                     for (int row = 2; row < rowcount; row++)
                     {
-                        viewModel.FileData.Add(new Athlete
+                        _powerliftDBContext.Athletes.Add(new AthletesDAL
                         {
-                            //will need to have data formatted in a very specific way
+                            //user will need to have data formatted in a very specific way
                             MemberID = worksheet.Cells[row, 1].Value.ToString().Trim(),
-                            Name = worksheet.Cells[row,2].Value.ToString().Trim(),
+                            Name = worksheet.Cells[row, 2].Value.ToString().Trim(),
                             Club = worksheet.Cells[row, 3].Value.ToString().Trim(),
                             WeightClass = worksheet.Cells[row, 4].Value.ToString().Trim(),
-                            DivisionString = worksheet.Cells[row, 5].Value.ToString().Trim(),
+                            LifterDivisions = worksheet.Cells[row, 5].Value.ToString().Trim(),
                             Gender = worksheet.Cells[row, 6].Value.ToString().Trim(),
                             Age = worksheet.Cells[row, 7].Value.ToString().Trim(),
                             Squat_Opener = worksheet.Cells[row, 8].Value.ToString().Trim(),
                             Bench_Opener = worksheet.Cells[row, 9].Value.ToString().Trim(),
                             Deadlift_Opener = worksheet.Cells[row, 10].Value.ToString().Trim(),
-                            MeetID = id ,
-                            MeetName = meetInfo.MeetName
-                            
+                            MeetID = id
+                        });
 
-                        });;
+                        _powerliftDBContext.SaveChanges();
+
                     }
                 }
             }
 
-            
-
-
-            //get each item in the database...Mapping with select isn't working so loop for now just to test
-            foreach(var person in viewModel.FileData)
+            viewModel.FileData = _powerliftDBContext.Athletes.Select(athlete => new Athlete()
             {
-                var dbItem = new AthletesDAL();
+                Name = athlete.Name,
+                MemberID = athlete.MemberID,
+                Club = athlete.Club,
+                WeightClass = athlete.WeightClass,
+                DivisionString = athlete.LifterDivisions,
+                Gender = athlete.Gender,
+                Age = athlete.Age,
+                Squat_Opener = athlete.Squat_Opener,
+                Bench_Opener = athlete.Bench_Opener,
+                Deadlift_Opener = athlete.Deadlift_Opener,
+                MeetID = id
 
-                dbItem.Name = person.Name;
-                dbItem.MemberID = person.MemberID;
-                dbItem.Club = person.Club;
-                dbItem.WeightClass = person.WeightClass;
-                dbItem.LifterDivisions = person.DivisionString;
-                dbItem.Gender = person.Gender;
-                dbItem.Age = person.Age;
-                dbItem.Squat_Opener = person.Squat_Opener;
-                dbItem.Bench_Opener = person.Bench_Opener;
-                dbItem.Deadlift_Opener = person.Deadlift_Opener;
-                dbItem.MeetID = person.MeetID;
-
-                _powerliftDBContext.Athletes.Add(dbItem);
-                _powerliftDBContext.SaveChanges();
-            }
+            }).ToList();
 
             viewModel.FileUploaded = true;
             return View("UploadReview", viewModel);
