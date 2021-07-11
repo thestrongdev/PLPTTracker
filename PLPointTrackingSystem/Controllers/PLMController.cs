@@ -60,6 +60,27 @@ namespace PLPointTrackingSystem.Controllers
             return View();
         }
 
+        public async Task<IActionResult> StoreMeetInfo(MeetInfoFormViewModel viewModel)
+        {
+            var scorer = await _userManager.GetUserAsync(User);
+
+            var meet = new MeetDAL();
+            meet.Id = scorer.Id;
+            meet.MeetName = viewModel.MeetName;
+            meet.MeetType = viewModel.MeetType;
+            meet.MeetState = viewModel.MeetState;
+            meet.MeetVenue = viewModel.MeetVenue;
+            meet.MeetCity = viewModel.MeetCity;
+            meet.MeetFed = viewModel.MeetFed;
+            meet.MeetDate = viewModel.MeetDate;
+
+            _powerliftDBContext.Add(meet);
+            _powerliftDBContext.SaveChanges();
+
+            return View();
+        }
+
+
         public IActionResult MeetList()
         {
             var viewModel = new MeetListViewModel();

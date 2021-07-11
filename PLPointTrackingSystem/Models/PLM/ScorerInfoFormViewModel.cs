@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace PLPointTrackingSystem.Models.PLM
 {
-    public class ScorerInfoViewModel
+    public class ScorerInfoFormViewModel
     {
 
         public int MemberID { get; set; }

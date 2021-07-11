@@ -3,12 +3,12 @@
 *@
 @{
 }
-@model PLPointTrackingSystem.Models.PLM.ScorerInfoViewModel
+@model PLPointTrackingSystem.Models.PLM.ScorerInfoFormViewModel
 
 <link rel="stylesheet" href="~/css/stylesheet.css" />
 
 <div id="scorerInfoForm">
-    <form asp-controller="PLM" asp-action="SubmitMeetInfo" method="post">
+    <form asp-controller="PLM" asp-action="StoreScorerInfo" method="post">
 
         <div>
             <label asp-for="Role">What is your role?: </label>
