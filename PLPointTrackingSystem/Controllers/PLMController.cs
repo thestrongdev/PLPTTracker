@@ -37,6 +37,24 @@ namespace PLPointTrackingSystem.Controllers
             return View();
         }
 
+        public IActionResult ScorerInfoForm()
+        {
+            return View();
+        }
+
+        public async Task<IActionResult> StoreScorerInfo(ScorerInfoFormViewModel viewModel)
+        {
+            var scorer = await _userManager.GetUserAsync(User);
+
+            var member = new MemberDAL();
+            member.Role = viewModel.Role;
+            member.Id = scorer.Id;
+            _powerliftDBContext.Add(member);
+            _powerliftDBContext.SaveChanges();
+
+            return View("Index");
+        }
+
         public IActionResult MeetInfoForm()
         {
             return View();
