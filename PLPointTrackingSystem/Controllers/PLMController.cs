@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using PLPointTrackingSystem.DALModels;
 using PLPointTrackingSystem.Models.PLM;
@@ -26,7 +27,8 @@ namespace PLPointTrackingSystem.Controllers
         {
             return View();
         }
-
+  
+        [Authorize]
         public IActionResult GettingStarted(int id)
         {
             var viewModel = new GettingStartedViewModel();

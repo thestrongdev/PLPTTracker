@@ -10,8 +10,8 @@ using PLPointTrackingSystem.Services;
 namespace PLPointTrackingSystem.Migrations
 {
     [DbContext(typeof(PowerliftDBContext))]
-    [Migration("20210520225832_DALupdates")]
-    partial class DALupdates
+    [Migration("20210711161718_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
