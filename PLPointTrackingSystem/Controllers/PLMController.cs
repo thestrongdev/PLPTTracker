@@ -81,12 +81,27 @@ namespace PLPointTrackingSystem.Controllers
         }
 
 
-        public IActionResult MeetList()
+        public async Task<IActionResult> MeetList()
         {
+            var scorer = await _userManager.GetUserAsync(User);
+
             var viewModel = new MeetListViewModel();
+            //grab meets from database
+            var scorerList = _powerliftDBContext.Meets.Where(user => user.Id == scorer.Id).ToList();
+            viewModel.MembersMeets = scorerList.Select(meet => new Meet()
+            {
+                MeetCity = meet.MeetCity,
+                MeetDate = meet.MeetDate,
+                MeetFed = meet.MeetFed,
+                MeetName = meet.MeetName,
+                MeetState = meet.MeetState,
+                MeetType =meet.MeetType,
+                MeetVenue = meet.MeetVenue,
+                MeetID = meet.MeetID
 
+            }).ToList();
 
-            return View();
+            return View(viewModel);
         }
 
         public IActionResult ScoreMeet(int id)

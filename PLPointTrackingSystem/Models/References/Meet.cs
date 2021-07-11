@@ -8,7 +8,7 @@ namespace PLPointTrackingSystem
 {
     public class Meet
     {
-        public string MeetID { get; set; }
+        public int MeetID { get; set; }
         public string MeetName { get; set; }
         public string MeetType { get; set; } //local, state, regional, national, world
 
