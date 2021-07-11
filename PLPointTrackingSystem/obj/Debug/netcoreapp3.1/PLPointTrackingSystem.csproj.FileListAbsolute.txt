@@ -217,3 +217,4 @@ C:\Users\goods\source\repos\PLPointTrackingSystem\PLPointTrackingSystem\obj\Debu
 C:\Users\goods\source\repos\PLPointTrackingSystem\PLPointTrackingSystem\obj\Debug\netcoreapp3.1\PLPointTrackingSystem.dll
 C:\Users\goods\source\repos\PLPointTrackingSystem\PLPointTrackingSystem\obj\Debug\netcoreapp3.1\PLPointTrackingSystem.pdb
 C:\Users\goods\source\repos\PLPointTrackingSystem\PLPointTrackingSystem\obj\Debug\netcoreapp3.1\PLPointTrackingSystem.genruntimeconfig.cache
+C:\Users\goods\source\repos\PLPointTrackingSystem\PLPointTrackingSystem\obj\Debug\netcoreapp3.1\Razor\Views\PLM\ScorerInfoForm.cshtml.g.cs
