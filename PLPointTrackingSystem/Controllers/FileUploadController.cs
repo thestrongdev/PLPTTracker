@@ -27,6 +27,7 @@ namespace PLPointTrackingSystem.Controllers
 
         public async Task<IActionResult> Import(IFormFile file, int id) //STILL NEED TO ADD TO MAP TO DATABASE AS WELL W/LINQ
         {
+            var meetInfo = _powerliftDBContext.Meets.Where(meet => meet.MeetID == id).FirstOrDefault();
             var viewModel = new UploadReviewViewModel();
             viewModel.FileData = new List<Athlete>();
 
@@ -54,13 +55,17 @@ namespace PLPointTrackingSystem.Controllers
                             Squat_Opener = worksheet.Cells[row, 8].Value.ToString().Trim(),
                             Bench_Opener = worksheet.Cells[row, 9].Value.ToString().Trim(),
                             Deadlift_Opener = worksheet.Cells[row, 10].Value.ToString().Trim(),
-                            MeetID = id //until we actually add a meet
+                            MeetID = id ,
+                            MeetName = meetInfo.MeetName
                             
 
-                        });
+                        });;
                     }
                 }
             }
+
+            
+
 
             //get each item in the database...Mapping with select isn't working so loop for now just to test
             foreach(var person in viewModel.FileData)

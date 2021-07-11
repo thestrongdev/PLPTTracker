@@ -13,7 +13,7 @@
 
         <a asp-action="MeetInfoForm" asp-controller="PLM">link to add a new meet to score</a>
 
-        @if(@Model.MembersMeets.Count != 0) {
+        @if(@Model.MembersMeets !=null) {
      
             @foreach (var meet in Model.MembersMeets)
             {
