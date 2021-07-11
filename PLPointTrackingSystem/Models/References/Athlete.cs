@@ -35,5 +35,7 @@ namespace PLPointTrackingSystem
         public int CurrentMeetRanking { get; set; }
 
         public int MeetID { get; set; }
+
+        public string MeetName { get; set; }
     }
 }

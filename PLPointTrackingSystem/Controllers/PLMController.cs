@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using PLPointTrackingSystem.DALModels;
+using PLPointTrackingSystem.Models.Home;
 using PLPointTrackingSystem.Models.PLM;
 using PLPointTrackingSystem.Services;
 using System;
@@ -26,7 +28,8 @@ namespace PLPointTrackingSystem.Controllers
         {
             return View();
         }
-
+  
+        [Authorize]
         public IActionResult GettingStarted(int id)
         {
             var viewModel = new GettingStartedViewModel();
@@ -35,17 +38,74 @@ namespace PLPointTrackingSystem.Controllers
             return View();
         }
 
+        public IActionResult ScorerInfoForm()
+        {
+            return View();
+        }
+
+        public async Task<IActionResult> StoreScorerInfo(ScorerInfoFormViewModel viewModel)
+        {
+            var scorer = await _userManager.GetUserAsync(User);
+
+            var member = new MemberDAL();
+            member.Role = viewModel.Role;
+            member.Id = scorer.Id;
+            _powerliftDBContext.Add(member);
+            _powerliftDBContext.SaveChanges();
+
+            var home = new IndexViewModel();
+
+            return View("~/Views/Home/Index.cshtml", home);
+        }
+
         public IActionResult MeetInfoForm()
         {
             return View();
         }
 
-        public IActionResult MeetList()
+        public async Task<IActionResult> StoreMeetInfo(MeetInfoFormViewModel viewModel)
         {
+            var scorer = await _userManager.GetUserAsync(User);
+
+            var meet = new MeetDAL();
+            meet.Id = scorer.Id;
+            meet.MeetName = viewModel.MeetName;
+            meet.MeetType = viewModel.MeetType;
+            meet.MeetState = viewModel.MeetState;
+            meet.MeetVenue = viewModel.MeetVenue;
+            meet.MeetCity = viewModel.MeetCity;
+            meet.MeetFed = viewModel.MeetFed;
+            meet.MeetDate = viewModel.MeetDate;
+
+            _powerliftDBContext.Add(meet);
+            _powerliftDBContext.SaveChanges();
+
+            return View("MeetList");
+        }
+
+
+        public async Task<IActionResult> MeetList()
+        {
+            var scorer = await _userManager.GetUserAsync(User);
+
             var viewModel = new MeetListViewModel();
+            //grab meets from database
+            var scorerList = _powerliftDBContext.Meets.Where(user => user.Id == scorer.Id).ToList();
+            viewModel.MembersMeets = new List<Meet>();
+            viewModel.MembersMeets = scorerList.Select(meet => new Meet()
+            {
+                MeetCity = meet.MeetCity,
+                MeetDate = meet.MeetDate,
+                MeetFed = meet.MeetFed,
+                MeetName = meet.MeetName,
+                MeetState = meet.MeetState,
+                MeetType =meet.MeetType,
+                MeetVenue = meet.MeetVenue,
+                MeetID = meet.MeetID
 
+            }).ToList();
 
-            return View();
+            return View(viewModel);
         }
 
         public IActionResult ScoreMeet(int id)
@@ -92,42 +152,6 @@ namespace PLPointTrackingSystem.Controllers
         {
             return View();
         }
-
-        //NEED FILTERING FUNCTIONALITY TOO
-
-        public IActionResult SubmitMeetInfo(MeetInfoFormViewModel viewModel)
-        {
-            var meet = new MeetDAL();
-            meet.MeetType = viewModel.MeetType;
-            meet.MeetName = viewModel.MeetName;
-            meet.MeetFed = viewModel.MeetFed;
-            meet.MeetDate = viewModel.MeetDate;
-            meet.MeetCity = viewModel.MeetCity;
-            meet.MeetState = viewModel.MeetState;
-            meet.MeetVenue = viewModel.MeetVenue;
-
-            _powerliftDBContext.Meets.Add(meet); 
-            _powerliftDBContext.SaveChanges();
-
-           //BELOW LOGIC IF UPLOAD MEET DATA FIRST
-
-
-
-            //BELOW LOGIC IF UPLOAD ATHLETES BEFORE MEET DATA
-
-            //var meetAthletes = _powerliftDBContext.Athletes.Where(athlete => athlete.MeetID == 0);
-            //var currentMeet = _powerliftDBContext.Meets.Where(meet => meet.MeetName == viewModel.MeetName).FirstOrDefault();
-
-            //foreach (var athlete in meetAthletes)
-            //{
-            //    athlete.MeetID = currentMeet.MeetID;
-            //    _powerliftDBContext.SaveChanges();
-            //}
-
-            return View("ScoreMeet");
-        }
-
-
 
 
         //FEATURES TO ADD

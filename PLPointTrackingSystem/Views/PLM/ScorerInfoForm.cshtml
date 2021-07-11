@@ -1,0 +1,21 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model PLPointTrackingSystem.Models.PLM.ScorerInfoFormViewModel
+
+<link rel="stylesheet" href="~/css/stylesheet.css" />
+
+<div id="scorerInfoForm">
+    <form asp-controller="PLM" asp-action="StoreScorerInfo" method="post">
+
+        <div>
+            <label asp-for="Role">What is your role?: </label>
+            <input asp-for="Role" />
+        </div>
+
+        <button class="btn btn-dark">SUBMIT INFO</button>
+
+    </form>
+</div>
