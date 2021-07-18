@@ -42,7 +42,9 @@ namespace PLPointTrackingSystem.DALModels
 
         public int CurrentMeetRanking { get; set; }
 
-        
+        public string WeighIn { get; set; }
+
+
         //WHICH MEET?? NEED TO ADD A MEET FIRST!!
 
         [ForeignKey("MeetID")]

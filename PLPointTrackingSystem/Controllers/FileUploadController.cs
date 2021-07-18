@@ -55,7 +55,8 @@ namespace PLPointTrackingSystem.Controllers
                             Squat_Opener = worksheet.Cells[row, 8].Value.ToString().Trim(),
                             Bench_Opener = worksheet.Cells[row, 9].Value.ToString().Trim(),
                             Deadlift_Opener = worksheet.Cells[row, 10].Value.ToString().Trim(),
-                            MeetID = id
+                            MeetID = id,
+                            WeighIn = worksheet.Cells[row, 11].Value.ToString().Trim()
                         });
 
                         _powerliftDBContext.SaveChanges();

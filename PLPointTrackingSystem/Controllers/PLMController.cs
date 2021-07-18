@@ -76,6 +76,7 @@ namespace PLPointTrackingSystem.Controllers
             meet.MeetCity = viewModel.MeetCity;
             meet.MeetFed = viewModel.MeetFed;
             meet.MeetDate = viewModel.MeetDate;
+            meet.MeetZip = viewModel.MeetZip;
 
             _powerliftDBContext.Add(meet);
             _powerliftDBContext.SaveChanges();
@@ -106,6 +107,23 @@ namespace PLPointTrackingSystem.Controllers
             }).ToList();
 
             return View(viewModel);
+        }
+
+        public IActionResult DeleteMeet(int id)
+        {
+            //first remove athletes from athlete table
+            _powerliftDBContext.Remove(_powerliftDBContext.Athletes.Where(athlete => athlete.MeetID == id));
+            _powerliftDBContext.SaveChanges();
+
+            //then remove meet from meet table
+            _powerliftDBContext.Remove(_powerliftDBContext.Meets.Where(meet => meet.MeetID == id));
+            _powerliftDBContext.SaveChanges();
+
+            var viewModel = new MeetListViewModel();
+
+            //need to route back to meet list and add same logic here!!!
+
+            return View("MeetList", viewModel);
         }
 
         public IActionResult ScoreMeet(int id)

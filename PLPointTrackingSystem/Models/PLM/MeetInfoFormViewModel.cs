@@ -24,6 +24,8 @@ namespace PLPointTrackingSystem.Models.PLM
 
         public string MeetVenue { get; set; }
 
+        public int MeetZip { get; set; }
+
 
     }
 }

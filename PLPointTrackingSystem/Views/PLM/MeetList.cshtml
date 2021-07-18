@@ -18,6 +18,7 @@
             @foreach (var meet in Model.MembersMeets)
             {
                 <a asp-route-id="@meet.MeetID" asp-action="ScoreMeet" asp-controller="PLM">@meet.MeetName</a>
+                <a asp-route-id="@meet.MeetID" asp-action="DeleteMeet" asp-controller="PLM">DELETE MEET INFO</a>
                 <br />
             }
     

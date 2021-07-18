@@ -10,8 +10,8 @@ using PLPointTrackingSystem.Services;
 namespace PLPointTrackingSystem.Migrations
 {
     [DbContext(typeof(PowerliftDBContext))]
-    [Migration("20210711161718_Initial")]
-    partial class Initial
+    [Migration("20210718170734_DALupdates")]
+    partial class DALupdates
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -291,6 +291,9 @@ namespace PLPointTrackingSystem.Migrations
                     b.Property<double>("Total")
                         .HasColumnType("float");
 
+                    b.Property<string>("WeighIn")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("WeightClass")
                         .HasColumnType("nvarchar(max)");
 
@@ -334,6 +337,9 @@ namespace PLPointTrackingSystem.Migrations
 
                     b.Property<string>("MeetVenue")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("MeetZip")
+                        .HasColumnType("int");
 
                     b.Property<bool>("ScoringComplete")
                         .HasColumnType("bit");

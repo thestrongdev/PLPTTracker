@@ -289,6 +289,9 @@ namespace PLPointTrackingSystem.Migrations
                     b.Property<double>("Total")
                         .HasColumnType("float");
 
+                    b.Property<string>("WeighIn")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("WeightClass")
                         .HasColumnType("nvarchar(max)");
 
@@ -332,6 +335,9 @@ namespace PLPointTrackingSystem.Migrations
 
                     b.Property<string>("MeetVenue")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("MeetZip")
+                        .HasColumnType("int");
 
                     b.Property<bool>("ScoringComplete")
                         .HasColumnType("bit");

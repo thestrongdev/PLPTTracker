@@ -18,6 +18,8 @@ namespace PLPointTrackingSystem
         public int Wilks { get; set; }
         public int Total { get; set; }
 
+        public double WeighIn { get; set; }
+
         public string DivisionString { get; set; }
         public List<Division> LifterDivisions { get; set; } //MAP TO THIS AFTER GATHERING DATA FROM UPLOAD???
 

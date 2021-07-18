@@ -27,6 +27,8 @@ namespace PLPointTrackingSystem.DALModels
 
         public string MeetVenue { get; set; }
 
+        public int MeetZip { get; set; }
+
         public bool ScoringComplete { get; set; }
 
         [ForeignKey("AspNetUsers")]

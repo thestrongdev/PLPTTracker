@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace PLPointTrackingSystem.Migrations
 {
-    public partial class Initial : Migration
+    public partial class DALupdates : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -165,6 +165,7 @@ namespace PLPointTrackingSystem.Migrations
                     MeetCity = table.Column<string>(nullable: true),
                     MeetState = table.Column<string>(nullable: true),
                     MeetVenue = table.Column<string>(nullable: true),
+                    MeetZip = table.Column<int>(nullable: false),
                     ScoringComplete = table.Column<bool>(nullable: false),
                     Id = table.Column<string>(nullable: true),
                     UserId = table.Column<string>(nullable: true)
@@ -229,6 +230,7 @@ namespace PLPointTrackingSystem.Migrations
                     Dead_Attempt2 = table.Column<double>(nullable: false),
                     Dead_Attempt3 = table.Column<double>(nullable: false),
                     CurrentMeetRanking = table.Column<int>(nullable: false),
+                    WeighIn = table.Column<string>(nullable: true),
                     MeetID = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
