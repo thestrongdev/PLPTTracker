@@ -9,5 +9,6 @@ namespace PLPointTrackingSystem.Models.PLM
     public class MeetListViewModel
     {
         public List<Meet> MembersMeets { get; set; }
+        public bool MemberRoleUpdated { get; set; }
     }
 }

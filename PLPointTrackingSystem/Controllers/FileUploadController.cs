@@ -25,7 +25,7 @@ namespace PLPointTrackingSystem.Controllers
             return View();
         }
 
-        public async Task<IActionResult> Import(IFormFile file, int id) //STILL NEED TO ADD TO MAP TO DATABASE AS WELL W/LINQ
+        public async Task<IActionResult> Import(IFormFile file, int id) 
         {
             var meetInfo = _powerliftDBContext.Meets.Where(meet => meet.MeetID == id).FirstOrDefault();
             var viewModel = new UploadReviewViewModel();
@@ -82,6 +82,9 @@ namespace PLPointTrackingSystem.Controllers
             }).ToList();
 
             viewModel.FileUploaded = true;
+
+            meetInfo.AthleteDataUploaded = true;
+            _powerliftDBContext.SaveChanges();
             return View("UploadReview", viewModel);
         }
 

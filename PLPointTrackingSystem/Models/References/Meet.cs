@@ -23,6 +23,8 @@ namespace PLPointTrackingSystem
 
         public string MeetVenue { get; set; }
 
+        public bool AthleteDataUploaded { get; set; }
+
         public bool ScoringComplete { get; set; }
     }
 }

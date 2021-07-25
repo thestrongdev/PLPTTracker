@@ -31,6 +31,8 @@ namespace PLPointTrackingSystem.DALModels
 
         public bool ScoringComplete { get; set; }
 
+        public bool AthleteDataUploaded { get; set; }
+
         [ForeignKey("AspNetUsers")]
         public string Id { get; set; }
 

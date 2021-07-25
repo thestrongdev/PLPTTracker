@@ -18,8 +18,7 @@ namespace PLPointTrackingSystem.Services
         public DbSet<AthletesDAL> Athletes { get; set; }
         public DbSet<MeetDAL> Meets { get; set; }
 
-        public DbSet<MemberDAL> Role { get; set; }
+        public DbSet<MemberDAL> MemberRoles { get; set; }
 
-        //public DbSet<UploadTestDAL> Test { get; set; }
     }
 }

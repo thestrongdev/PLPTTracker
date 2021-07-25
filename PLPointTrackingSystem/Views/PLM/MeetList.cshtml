@@ -11,23 +11,53 @@
     <div id="scoreMeet">
         <h2>SCORE A MEET?</h2>
 
-        <a asp-action="MeetInfoForm" asp-controller="PLM">add a new meet to score</a>
-
-        @if(@Model.MembersMeets !=null) {
-     
-            @foreach (var meet in Model.MembersMeets)
-            {
-                <a asp-route-id="@meet.MeetID" asp-action="ScoreMeet" asp-controller="PLM">@meet.MeetName</a>
-                <a asp-route-id="@meet.MeetID" asp-action="DeleteMeet" asp-controller="PLM">DELETE MEET INFO</a>
-                <br />
-            }
-    
-            <p>meets that are not completed (fully scored) go here</p>
-
-            <h2>VIEW MEET RESULTS</h2>
-        } else
+        <br />
+        @if (Model.MemberRoleUpdated)
         {
-            <h3>YOU HAVE NOT STARTED SCORING FOR ANY MEETS</h3>
+            <a asp-action="MeetInfoForm" asp-controller="PLM">add a new meet to score</a>
+            <br />
+            <br />
+
+            @if (@Model.MembersMeets != null)
+            {
+
+                @foreach (var meet in Model.MembersMeets)
+                {
+                    <h3>@meet.MeetName</h3>
+
+                    @if (meet.AthleteDataUploaded)
+                    {
+                        <a asp-route-id="@meet.MeetID" asp-action="ScoreMeet" asp-controller="PLM">SCORE MEET</a>
+                        <br />
+                        <h3>add option to update/override upload</h3>
+                        <h3>option to add individual athlete</h3>
+                        <br />
+                    }
+                    else
+                    {
+                        <a asp-route-id="@meet.MeetID" asp-action="GettingStarted" asp-controller="PLM">Upload Athlete Data</a>
+                        <br />
+                    }
+
+                    <a asp-route-id="@meet.MeetID" asp-action="DeleteMeet" asp-controller="PLM">DELETE MEET INFO</a>
+                    <br />
+                    <br />
+                }
+
+                <u>Meets that are not completed, but started: </u>
+                <br />
+                <br />
+
+                <h2>VIEW COMPLETED MEET RESULTS</h2>
+            }
+            else
+            {
+                <h3>YOU HAVE NOT STARTED SCORING FOR ANY MEETS</h3>
+            }
+        }
+        else
+        {
+            <a asp-action="ScorerInfoForm" asp-controller="PLM">YOU HAVE NOT ADDED YOUR MEMBER ROLE YET</a>
         }
 
     </div>

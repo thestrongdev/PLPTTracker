@@ -182,7 +182,7 @@ namespace PLPointTrackingSystem.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Role",
+                name: "MemberRoles",
                 columns: table => new
                 {
                     MemberID = table.Column<int>(nullable: false)
@@ -193,9 +193,9 @@ namespace PLPointTrackingSystem.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Role", x => x.MemberID);
+                    table.PrimaryKey("PK_MemberRoles", x => x.MemberID);
                     table.ForeignKey(
-                        name: "FK_Role_AspNetUsers_UserId",
+                        name: "FK_MemberRoles_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
@@ -294,8 +294,8 @@ namespace PLPointTrackingSystem.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Role_UserId",
-                table: "Role",
+                name: "IX_MemberRoles_UserId",
+                table: "MemberRoles",
                 column: "UserId");
         }
 
@@ -320,7 +320,7 @@ namespace PLPointTrackingSystem.Migrations
                 name: "Athletes");
 
             migrationBuilder.DropTable(
-                name: "Role");
+                name: "MemberRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

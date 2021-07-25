@@ -10,7 +10,7 @@ using PLPointTrackingSystem.Services;
 namespace PLPointTrackingSystem.Migrations
 {
     [DbContext(typeof(PowerliftDBContext))]
-    [Migration("20210718170734_DALupdates")]
+    [Migration("20210725170748_DALupdates")]
     partial class DALupdates
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -374,7 +374,7 @@ namespace PLPointTrackingSystem.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Role");
+                    b.ToTable("MemberRoles");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

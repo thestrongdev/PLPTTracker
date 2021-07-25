@@ -50,7 +50,7 @@ namespace PLPointTrackingSystem.Controllers
             var member = new MemberDAL();
             member.Role = viewModel.Role;
             member.Id = scorer.Id;
-            _powerliftDBContext.Add(member);
+            _powerliftDBContext.MemberRoles.Add(member);
             _powerliftDBContext.SaveChanges();
 
             var home = new IndexViewModel();
@@ -77,11 +77,40 @@ namespace PLPointTrackingSystem.Controllers
             meet.MeetFed = viewModel.MeetFed;
             meet.MeetDate = viewModel.MeetDate;
             meet.MeetZip = viewModel.MeetZip;
+            
 
             _powerliftDBContext.Add(meet);
             _powerliftDBContext.SaveChanges();
 
-            return View("MeetList");
+            var meetListView = new MeetListViewModel();
+            //grab meets from database
+            var scorerList = _powerliftDBContext.Meets.Where(user => user.Id == scorer.Id).ToList();
+
+            var scorerRole = _powerliftDBContext.MemberRoles.Where(user => user.Id == scorer.Id).FirstOrDefault();
+
+            if(scorerRole != null)
+            {
+                meetListView.MemberRoleUpdated = true;
+            }
+
+            meetListView.MembersMeets = new List<Meet>();
+            meetListView.MembersMeets = scorerList.Select(meet => new Meet()
+            {
+                MeetCity = meet.MeetCity,
+                MeetDate = meet.MeetDate,
+                MeetFed = meet.MeetFed,
+                MeetName = meet.MeetName,
+                MeetState = meet.MeetState,
+                MeetType = meet.MeetType,
+                MeetVenue = meet.MeetVenue,
+                MeetID = meet.MeetID,
+                AthleteDataUploaded = meet.AthleteDataUploaded
+
+            }).ToList();
+
+      
+
+            return View("MeetList", meetListView);
         }
 
 
@@ -102,26 +131,66 @@ namespace PLPointTrackingSystem.Controllers
                 MeetState = meet.MeetState,
                 MeetType =meet.MeetType,
                 MeetVenue = meet.MeetVenue,
-                MeetID = meet.MeetID
+                MeetID = meet.MeetID,
+                AthleteDataUploaded = meet.AthleteDataUploaded
 
             }).ToList();
+
+            var memberRole = _powerliftDBContext.MemberRoles.Where(user => user.Id == scorer.Id).FirstOrDefault();
+
+            if(memberRole != null)
+            {
+                viewModel.MemberRoleUpdated = true;
+            }
 
             return View(viewModel);
         }
 
-        public IActionResult DeleteMeet(int id)
+        public async Task<IActionResult> DeleteMeet(int id)
         {
+            var scorer = await _userManager.GetUserAsync(User);
+            //first check if athletes exist
+            var athletesExist = _powerliftDBContext.Athletes.Where(athlete => athlete.MeetID == id);
+
             //first remove athletes from athlete table
-            _powerliftDBContext.Remove(_powerliftDBContext.Athletes.Where(athlete => athlete.MeetID == id));
-            _powerliftDBContext.SaveChanges();
+            if (athletesExist.Count() == 0)
+            {
+                _powerliftDBContext.Athletes.RemoveRange(athletesExist);
+                _powerliftDBContext.SaveChanges();
+            }
+
+            var meetToRemove = _powerliftDBContext.Meets.Where(meet => meet.MeetID == id).FirstOrDefault();
+
 
             //then remove meet from meet table
-            _powerliftDBContext.Remove(_powerliftDBContext.Meets.Where(meet => meet.MeetID == id));
+            _powerliftDBContext.Meets.Remove(meetToRemove);
             _powerliftDBContext.SaveChanges();
 
             var viewModel = new MeetListViewModel();
 
             //need to route back to meet list and add same logic here!!!
+            var scorerList = _powerliftDBContext.Meets.Where(user => user.Id == scorer.Id).ToList();
+            viewModel.MembersMeets = new List<Meet>();
+            viewModel.MembersMeets = scorerList.Select(meet => new Meet()
+            {
+                MeetCity = meet.MeetCity,
+                MeetDate = meet.MeetDate,
+                MeetFed = meet.MeetFed,
+                MeetName = meet.MeetName,
+                MeetState = meet.MeetState,
+                MeetType = meet.MeetType,
+                MeetVenue = meet.MeetVenue,
+                MeetID = meet.MeetID,
+                AthleteDataUploaded = meet.AthleteDataUploaded
+
+            }).ToList();
+
+            var memberRole = _powerliftDBContext.MemberRoles.Where(user => user.Id == scorer.Id).FirstOrDefault();
+
+            if (memberRole != null)
+            {
+                viewModel.MemberRoleUpdated = true;
+            }
 
             return View("MeetList", viewModel);
         }
