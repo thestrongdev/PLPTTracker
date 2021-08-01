@@ -68,31 +68,9 @@ namespace PLPointTrackingSystem.Controllers
 
         public async Task<IActionResult> StoreMeetInfo(MeetInfoFormViewModel viewModel)
         {
-            var scorer = await _userManager.GetUserAsync(User);
-
-            var meet = new MeetDAL();
-            meet.Id = scorer.Id;
-            meet.MeetName = viewModel.MeetName;
-            meet.MeetType = viewModel.MeetType;
-            meet.MeetState = viewModel.MeetState;
-            meet.MeetVenue = viewModel.MeetVenue;
-            meet.MeetCity = viewModel.MeetCity;
-            meet.MeetFed = viewModel.MeetFed;
-            meet.MeetDate = viewModel.MeetDate;
-            meet.MeetZip = viewModel.MeetZip;
-            
-
-            _powerliftDBContext.Add(meet);
-            _powerliftDBContext.SaveChanges();
-
+            await _helper.StoreMeetInfo(viewModel);
             var meetListView = new MeetListViewModel();
-            
-            var scorerRole = _powerliftDBContext.MemberRoles.Where(user => user.Id == scorer.Id).FirstOrDefault();
-
-            if(scorerRole != null)
-            {
-                meetListView.MemberRoleUpdated = true;
-            }
+            meetListView.MemberRoleUpdated = await _helper.MemberRoleUpdated();
 
             meetListView.MembersMeets = new List<Meet>();
             meetListView.MembersMeets = await _helper.ListMeets();
@@ -103,24 +81,16 @@ namespace PLPointTrackingSystem.Controllers
 
         public async Task<IActionResult> MeetList()
         {
-            var scorer = await _userManager.GetUserAsync(User);
             var viewModel = new MeetListViewModel();
             viewModel.MembersMeets = new List<Meet>();
             viewModel.MembersMeets = await _helper.ListMeets();
-
-            var memberRole = _powerliftDBContext.MemberRoles.Where(user => user.Id == scorer.Id).FirstOrDefault();
-
-            if(memberRole != null)
-            {
-                viewModel.MemberRoleUpdated = true;
-            }
+            viewModel.MemberRoleUpdated = await _helper.MemberRoleUpdated();
 
             return View(viewModel);
         }
 
         public async Task<IActionResult> DeleteMeet(int id)
         {
-            var scorer = await _userManager.GetUserAsync(User);
             //first check if athletes exist
             var athletesExist = _powerliftDBContext.Athletes.Where(athlete => athlete.MeetID == id);
 
@@ -140,14 +110,8 @@ namespace PLPointTrackingSystem.Controllers
             var viewModel = new MeetListViewModel();
             viewModel.MembersMeets = new List<Meet>();
             viewModel.MembersMeets = await _helper.ListMeets();
-
-            var memberRole = _powerliftDBContext.MemberRoles.Where(user => user.Id == scorer.Id).FirstOrDefault();
-
-            if (memberRole != null)
-            {
-                viewModel.MemberRoleUpdated = true;
-            }
-
+            viewModel.MemberRoleUpdated = await _helper.MemberRoleUpdated();
+            
             return View("MeetList", viewModel);
         }
 
@@ -195,17 +159,6 @@ namespace PLPointTrackingSystem.Controllers
         {
             return View();
         }
-
-
-        //FEATURES TO ADD
-        //--------------------------------------------------------------------------------------
-        //upload meet and athlete data --- DO THIS ONE ONE VIEW
-        //pull out rankings based on specific categories (age, division, weightclass, gender, etc.
-        //log in feature for whoever is scoring
-        //allow user to save meet data to their account and also download excel files of meet data
-        //as meet goes, user should be able to enter athlete data as lifts are made/missed
-        //bring in a powerlifting API to see how anyone ranked against people all over the world
-        //for each lifter that's lifting, show colors of weights that should be on the barbell
 
     }
 }

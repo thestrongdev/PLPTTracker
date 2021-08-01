@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using PLPointTrackingSystem.DALModels;
+using PLPointTrackingSystem.Models.PLM;
 using PLPointTrackingSystem.Services;
 using System;
 using System.Collections.Generic;
@@ -43,6 +45,38 @@ namespace PLPointTrackingSystem.Helpers
             return meets;
         }
 
-   
+        public async Task StoreMeetInfo(MeetInfoFormViewModel viewModel)
+        {
+            var scorer = await _userManager.GetUserAsync(_contextAccessor.HttpContext.User);
+
+            var meet = new MeetDAL();
+            meet.Id = scorer.Id;
+            meet.MeetName = viewModel.MeetName;
+            meet.MeetType = viewModel.MeetType;
+            meet.MeetState = viewModel.MeetState;
+            meet.MeetVenue = viewModel.MeetVenue;
+            meet.MeetCity = viewModel.MeetCity;
+            meet.MeetFed = viewModel.MeetFed;
+            meet.MeetDate = viewModel.MeetDate;
+            meet.MeetZip = viewModel.MeetZip;
+
+
+            _powerliftDBContext.Add(meet);
+            _powerliftDBContext.SaveChanges();
+        }
+
+        public async Task<Boolean> MemberRoleUpdated()
+        {
+            var scorer = await _userManager.GetUserAsync(_contextAccessor.HttpContext.User);
+
+            var scorerRole = _powerliftDBContext.MemberRoles.Where(user => user.Id == scorer.Id).FirstOrDefault();
+
+            if (scorerRole != null)
+            {
+                return true;
+            }
+
+            return false;
+        }
     }
 }
