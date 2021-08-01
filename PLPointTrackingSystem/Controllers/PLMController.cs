@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using PLPointTrackingSystem.DALModels;
+using PLPointTrackingSystem.Helpers;
 using PLPointTrackingSystem.Models.Home;
 using PLPointTrackingSystem.Models.PLM;
 using PLPointTrackingSystem.Services;
@@ -16,12 +17,14 @@ namespace PLPointTrackingSystem.Controllers
     {
         private readonly PowerliftDBContext _powerliftDBContext;
         private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserHelper _helper;
 
         public PLMController(PowerliftDBContext powerliftDBContext,
-            UserManager<IdentityUser> userManager)
+            UserManager<IdentityUser> userManager, UserHelper helper)
         {
             _powerliftDBContext = powerliftDBContext;
             _userManager = userManager;
+            _helper = helper;
         }
 
         public IActionResult Index()
@@ -83,9 +86,7 @@ namespace PLPointTrackingSystem.Controllers
             _powerliftDBContext.SaveChanges();
 
             var meetListView = new MeetListViewModel();
-            //grab meets from database
-            var scorerList = _powerliftDBContext.Meets.Where(user => user.Id == scorer.Id).ToList();
-
+            
             var scorerRole = _powerliftDBContext.MemberRoles.Where(user => user.Id == scorer.Id).FirstOrDefault();
 
             if(scorerRole != null)
@@ -94,21 +95,7 @@ namespace PLPointTrackingSystem.Controllers
             }
 
             meetListView.MembersMeets = new List<Meet>();
-            meetListView.MembersMeets = scorerList.Select(meet => new Meet()
-            {
-                MeetCity = meet.MeetCity,
-                MeetDate = meet.MeetDate,
-                MeetFed = meet.MeetFed,
-                MeetName = meet.MeetName,
-                MeetState = meet.MeetState,
-                MeetType = meet.MeetType,
-                MeetVenue = meet.MeetVenue,
-                MeetID = meet.MeetID,
-                AthleteDataUploaded = meet.AthleteDataUploaded
-
-            }).ToList();
-
-      
+            meetListView.MembersMeets = await _helper.ListMeets();
 
             return View("MeetList", meetListView);
         }
