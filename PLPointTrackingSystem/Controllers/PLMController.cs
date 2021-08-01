@@ -104,24 +104,9 @@ namespace PLPointTrackingSystem.Controllers
         public async Task<IActionResult> MeetList()
         {
             var scorer = await _userManager.GetUserAsync(User);
-
             var viewModel = new MeetListViewModel();
-            //grab meets from database
-            var scorerList = _powerliftDBContext.Meets.Where(user => user.Id == scorer.Id).ToList();
             viewModel.MembersMeets = new List<Meet>();
-            viewModel.MembersMeets = scorerList.Select(meet => new Meet()
-            {
-                MeetCity = meet.MeetCity,
-                MeetDate = meet.MeetDate,
-                MeetFed = meet.MeetFed,
-                MeetName = meet.MeetName,
-                MeetState = meet.MeetState,
-                MeetType =meet.MeetType,
-                MeetVenue = meet.MeetVenue,
-                MeetID = meet.MeetID,
-                AthleteDataUploaded = meet.AthleteDataUploaded
-
-            }).ToList();
+            viewModel.MembersMeets = await _helper.ListMeets();
 
             var memberRole = _powerliftDBContext.MemberRoles.Where(user => user.Id == scorer.Id).FirstOrDefault();
 
@@ -148,29 +133,13 @@ namespace PLPointTrackingSystem.Controllers
 
             var meetToRemove = _powerliftDBContext.Meets.Where(meet => meet.MeetID == id).FirstOrDefault();
 
-
             //then remove meet from meet table
             _powerliftDBContext.Meets.Remove(meetToRemove);
             _powerliftDBContext.SaveChanges();
 
             var viewModel = new MeetListViewModel();
-
-            //need to route back to meet list and add same logic here!!!
-            var scorerList = _powerliftDBContext.Meets.Where(user => user.Id == scorer.Id).ToList();
             viewModel.MembersMeets = new List<Meet>();
-            viewModel.MembersMeets = scorerList.Select(meet => new Meet()
-            {
-                MeetCity = meet.MeetCity,
-                MeetDate = meet.MeetDate,
-                MeetFed = meet.MeetFed,
-                MeetName = meet.MeetName,
-                MeetState = meet.MeetState,
-                MeetType = meet.MeetType,
-                MeetVenue = meet.MeetVenue,
-                MeetID = meet.MeetID,
-                AthleteDataUploaded = meet.AthleteDataUploaded
-
-            }).ToList();
+            viewModel.MembersMeets = await _helper.ListMeets();
 
             var memberRole = _powerliftDBContext.MemberRoles.Where(user => user.Id == scorer.Id).FirstOrDefault();
 
